@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://HUD/GameOver.gd" type="Script" id=1]
+
+[node name="Game Over" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 171.121
+margin_top = 55.0734
+margin_right = 902.121
+margin_bottom = 418.073
+text = "Congradulations, your score was "
+align = 1
+valign = 1
+
+[node name="Play_Again" type="Button" parent="."]
+margin_left = 428.346
+margin_top = 376.439
+margin_right = 648.346
+margin_bottom = 427.439
+text = "Do you want to play again?"
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 430.313
+margin_top = 461.016
+margin_right = 650.313
+margin_bottom = 512.016
+text = "Quit"
+[connection signal="pressed" from="Play_Again" to="." method="_on_Play_Again_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
