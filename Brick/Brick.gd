@@ -15,7 +15,7 @@ func _physics_process(_delta):
 func set_strength(s):
 	if s <= 0:
 		get_node("/root/Game/Powerup Container").add_powerup(position)
-		 die()
+		die()
 	strength = s 
 	var x = strength *100
 	$Sprite.region_rect = Rect2(x, 0, 99, 49)
