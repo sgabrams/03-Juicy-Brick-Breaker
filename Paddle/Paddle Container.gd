@@ -8,5 +8,6 @@ func _ready():
 
 func load_paddle():
 	var paddle = Paddle.instance() 
+	paddle.name = "Paddle"
 	add_child(paddle)
 	

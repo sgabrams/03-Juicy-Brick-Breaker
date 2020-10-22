@@ -40,11 +40,11 @@ func _ready():
 	start()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if get_child_count()== 0:
 		Global.update_level(1)
 		if Global.level > Levels.size():
-			get_tree().change_scene("res://HUD/Game Over.tscn")
+			var _new_scene = get_tree().change_scene("res://HUD/Game Over.tscn")
 		else:
 			start()
 		

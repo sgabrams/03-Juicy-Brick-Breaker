@@ -24,7 +24,7 @@ func _physics_process(_delta):
 	for body in bodies:
 		if body.get_parent().name== "Paddle Container":
 			var payload = $Payload
-			remove_child(($Payload)
+			remove_child($Payload)
 			get_node("/root/Game/Powerup Container").add_child(payload)
 			queue_free()
 			

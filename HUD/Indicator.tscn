@@ -5,6 +5,5 @@
 
 [node name="Indicator" type="Sprite"]
 texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 47, 47 )
+region_rect = Rect2( 0, 0, 10, 10 )
 script = ExtResource( 2 )

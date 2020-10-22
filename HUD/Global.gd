@@ -23,7 +23,7 @@ func update_lives(l):
 	lives += l
 	emit_signal("changed")
 	if lives <= 0:
-		get_tree().change_scene("res://HUD/GameOver.tscn")
+		var _new_scene = get_tree().change_scene("res://HUD/Game Over.tscn")
 	
 func update_level(l):
 	level+= l
