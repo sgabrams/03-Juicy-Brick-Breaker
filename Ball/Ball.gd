@@ -21,12 +21,13 @@ func release_ball():
 	mode = RigidBody2D.MODE_RIGID
 	var impulse = Vector2.RIGHT*speed
 	impulse = impulse.rotated(randf()*-PI)
+	print(impulse)
 	apply_central_impulse(impulse)
 
 
 func _physics_process(_delta):
-	var paddle = get_node("root/Game/Paddle Container/Paddle")
-	if not released:
+	var paddle = get_node_or_null("/root/Game/Paddle Container/Paddle")
+	if not released and paddle != null:
 		position = paddle.position
 		position.y -= 30
 	else:
@@ -37,8 +38,9 @@ func _physics_process(_delta):
 		for body in bodies:
 			collided = true
 			if body.get_parent().name== "Paddle Container":
-				$AnimatedSprite.play("hit")
-				body.find_node("AnimatedSprite").play("hit")
+				pass
+				#$AnimatedSprite.play("hit")
+				#body.find_node("AnimatedSprite").play("hit")
 			if body. is_in_group("brick"):
 				body.damage(1)
 	if Input.is_action_just_pressed("release") and not released:

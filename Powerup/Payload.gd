@@ -7,9 +7,9 @@ func _ready():
 
 func enable_payload():
 	if payload_type == 0:
-		var balls_container = get_node("/root/Game/Ball Container")
-		if balls_container:
-			var balls = ball_container.get_children()
+		var balls_container = get_node_or_null("/root/Game/Ball Container")
+		if balls_container != null:
+			var balls = balls_container.get_children()
 			for ball in balls:
 				if ball.get_node("AnimatedSprite").scale.x == 1:
 					ball.get_node("AnimatedSprite").scale = Vector2(1.5,1.5)
@@ -21,9 +21,9 @@ func enable_payload():
 		
 func disable_payload():
 	if payload_type == 0:
-		var balls_container = get_node("/root/Game/Ball Container")
-		if balls_container:
-			var balls = ball_container.get_children()
+		var balls_container = get_node_or_null("/root/Game/Ball Container")
+		if balls_container != null:
+			var balls = balls_container.get_children()
 			for ball in balls:
 				if ball.get_node("AnimatedSprite").scale.x == 1.5:
 					ball.get_node("AnimatedSprite").scale = Vector2(1,1)

@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var Powerup = load("res://Powerup/Powerup.tcsn")
+onready var Powerup = load("res://Powerup/Powerup.tscn")
 export var powerup_prob = 0.05
 
 

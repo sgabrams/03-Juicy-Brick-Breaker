@@ -3,6 +3,8 @@ extends StaticBody2D
 var strength = 0
 var points = 100
 
+onready var Powerup_Container = null
+
 var dying = false
 
 func _ready():
@@ -13,8 +15,11 @@ func _physics_process(_delta):
 		queue_free()
 
 func set_strength(s):
+	#if Powerup_Container == null:
+	#	Powerup_Container = get_node_or_null("/root/Game/Powerup Container")
 	if s <= 0:
-		get_node("/root/Game/Powerup Container").add_powerup(position)
+	#	if Powerup_Container != null:
+	#		Powerup_Container.add_powerup(position)
 		die()
 	strength = s 
 	var x = strength *100
@@ -22,7 +27,7 @@ func set_strength(s):
 	points = strength*10 + 100
 	
 func damage(d):
-	set_strength(strength - 1)
+	set_strength(strength - d)
 	Global.update_score(points)
 
 

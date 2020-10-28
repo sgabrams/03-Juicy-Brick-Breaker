@@ -6,12 +6,12 @@ onready var Indicator = load("res://HUD/Indicator.tscn")
 var indicators = []
 
 func _ready():
-	Global.connect("changed" ,self, "_on_Global_changed")
+	var _new_signal = Global.connect("changed" ,self, "_on_Global_changed")
 	
 	for i in range (Global.lives):
-		var indicator = Indicator.get_instance()
-		indicator.position.x = 33*i + 70
-		indicator.position.y = 31
+		var indicator = Indicator.instance()
+		indicator.position.x = 15*i + 60
+		indicator.position.y = 17
 		indicator.on = true
 		indicators.append(indicator)
 		add_child(indicator)
@@ -29,9 +29,9 @@ func update_lives():
 	var c = 0
 	for i in indicators:
 		if c < Global.lives:
-			i.turn_on()
+			i.show()
 		else:
-			i.turn_off()
+			i.hide()
 		c += 1 
 		
 			
@@ -41,11 +41,12 @@ func update_time():
 	
 	
 	
-func _on_Timer_tomeout():
-	time += 1
-	update_time()
-	
 func _on_Global_changed():
 	update_score()
 	update_lives()
 
+
+
+func _on_Timer_timeout():
+	time += 1
+	update_time()
