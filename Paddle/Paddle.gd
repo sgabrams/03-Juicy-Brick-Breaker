@@ -8,6 +8,12 @@ func _ready():
 	position.y = VP_size.y - 50
 
 
+func emit_particle(pos):
+	$Particles2D.global_position = pos
+	$Particles2D.emmitting = true
+
+
+
 func _physics_process(_delta):
 	var target = get_viewport().get_mouse_position().x
 	target = clamp(target, 0, VP_size.x)

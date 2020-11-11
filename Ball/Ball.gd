@@ -2,8 +2,8 @@ extends RigidBody2D
 
 onready var VP = get_viewport_rect().size
 var speed = 400
-export var min_speed = 100.0
-export var max_speed = 400.0
+var min_speed = 100.0
+var max_speed = 400.0
 var collided = false
 export var speedup = 1.05
 
@@ -14,6 +14,13 @@ func _ready():
 	set_max_contacts_reported(4)
 	if not released:
 		mode = RigidBody2D.MODE_KINEMATIC
+	$Sprite.modulate.s = 0.5
+
+
+func update_color():
+	$Color.color = Color8(34,184,207)
+	
+
 
 
 func release_ball():
@@ -38,11 +45,13 @@ func _physics_process(_delta):
 		for body in bodies:
 			collided = true
 			if body.get_parent().name== "Paddle Container":
-				pass
-				#$AnimatedSprite.play("hit")
-				#body.find_node("AnimatedSprite").play("hit")
+				$Sprite.modulate.h+=0.1
+				body.get_node("Particles2D").emitting = true
+				get_node("/root/Game/Paddle_Sound").playing = true
 			if body. is_in_group("brick"):
 				body.damage(1)
+				get_node("/root/Game/Brick_Sound").playing = true
+			get_node("/root/Game/Camera").add_trauma(0.2)
 	if Input.is_action_just_pressed("release") and not released:
 		release_ball()
 
@@ -66,5 +75,3 @@ func die():
 	
 
 
-func _on_AnimatedSprite_animation_finished():
-	$AnimatedSprite.play("default")

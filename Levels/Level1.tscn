@@ -1,12 +1,49 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Paddle/Paddle Container.gd" type="Script" id=1]
 [ext_resource path="res://Ball/Ball Container.gd" type="Script" id=2]
 [ext_resource path="res://Brick/Brick Container.gd" type="Script" id=3]
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=4]
 [ext_resource path="res://Powerup/Powerup Container.gd" type="Script" id=5]
+[ext_resource path="res://Levels/Camera.gd" type="Script" id=6]
+[ext_resource path="res://assets/confetti.png" type="Texture" id=7]
+[ext_resource path="res://assets/milkey way backround.jpg" type="Texture" id=8]
+[ext_resource path="res://assets/music.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/brick_sound.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/paddle_sound.wav" type="AudioStream" id=11]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.737143, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.984314, 0.984314, 0.984314, 0, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 400.0
+initial_velocity_random = 0.5
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
 [node name="Game" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 538.219, 394.203 )
+scale = Vector2( 2.04425, 2.92309 )
+texture = ExtResource( 8 )
 
 [node name="Walls" type="StaticBody2D" parent="."]
 collision_layer = 16
@@ -23,6 +60,12 @@ script = ExtResource( 3 )
 
 [node name="Paddle Container" type="Node2D" parent="."]
 script = ExtResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="Paddle Container"]
+emitting = false
+lifetime = 0.4
+process_material = SubResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Ball Container" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -69,4 +112,19 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="HUD"]
 autostart = true
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 6 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
+
+[node name="Paddle_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+
+[node name="Brick_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
 [connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_Timer_timeout"]

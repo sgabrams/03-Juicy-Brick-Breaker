@@ -68,4 +68,5 @@ func start():
 				var brick = Brick.instance()
 				brick.position = Vector2(x,y)
 				brick.set_strength((rows-1)-r)
+				brick.row = r 
 				add_child(brick)
